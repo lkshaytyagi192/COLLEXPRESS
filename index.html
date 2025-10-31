@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CollExpress - Empowering Student Earnings</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 2rem;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-menu a:hover {
+            background: #f8f9ff;
+            color: #667eea;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 80px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            animation: slideUp 1s ease-out 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: slideUp 1s ease-out 0.4s both;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .floating-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-card:nth-child(2) {
+            animation-delay: -1s;
+        }
+
+        .floating-card:nth-child(3) {
+            animation-delay: -2s;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Two-Sided Platform Styles */
+        .platform-sides {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
+        }
+
+        .sides-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .side-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .side-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .student-side:hover {
+            border-color: #667eea;
+        }
+
+        .business-side:hover {
+            border-color: #764ba2;
+        }
+
+        .side-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #f0f4ff;
+        }
+
+        .side-icon {
+            width: 80px;
+            height: 80px;
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            border-radius: 20px;
+        }
+
+        .student-side .side-icon {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .business-side .side-icon {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+
+        .side-header h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .side-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .side-content h4 {
+            color: #333;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .service-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .service-list li {
+            padding: 0.5rem 0;
+            color: #555;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #f0f4ff;
+        }
+
+        .service-list li:last-child {
+            border-bottom: none;
+        }
+
+        .side-benefits {
+            margin-bottom: 2rem;
+        }
+
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: #f8f9ff;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .benefit-icon {
+            font-size: 1.1rem;
+        }
+
+        .side-cta-btn {
+            width: 100%;
+            text-align: center;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .student-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .student-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .business-btn {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            color: white;
+        }
+
+        .business-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(118, 75, 162, 0.4);
+        }
+        .features {
+            padding: 8rem 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .feature-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #999;
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive Design */
+        
+        /* Large screens (1200px+) */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1400px;
+            }
+            
+            .hero-text h1 {
+                font-size: 4rem;
+            }
+        }
+
+        /* Medium screens (768px - 1199px) */
+        @media (max-width: 1199px) {
+            .hero-content {
+                gap: 3rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        /* Tablets (768px - 1023px) */
+        @media (max-width: 1023px) {
+            .container {
+                padding: 0 30px;
+            }
+            
+            .nav-container {
+                padding: 1rem 30px;
+            }
+            
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .floating-card {
+                padding: 1.5rem;
+                margin: 0.5rem;
+            }
+        }
+
+        /* Small tablets and large phones (600px - 767px) */
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-container {
+                padding: 1rem 20px;
+                position: relative;
+            }
+
+            .sides-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .benefit-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+                margin-top: 60px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+            
+            .hero-text p {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+                padding: 0 10px;
+            }
+            
+            .features {
+                padding: 4rem 0;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem;
+            }
+            
+            .stats {
+                padding: 4rem 0;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .footer {
+                padding: 3rem 0 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        /* Mobile phones (480px - 599px) */
+        @media (max-width: 599px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-text p {
+                font-size: 1rem;
+            }
+            
+            .hero-visual {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-top: 2rem;
+            }
+            
+            .floating-card {
+                margin: 0;
+                padding: 1.5rem;
+                animation: none;
+            }
+            
+            .card-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .features-grid {
+                margin-top: 1.5rem;
+            }
+            
+            .feature-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+        }
+
+        /* Small mobile phones (up to 479px) */
+        @media (max-width: 479px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .nav-container {
+                padding: 1rem 15px;
+            }
+            
+            .logo {
+                font-size: 1.3rem;
+            }
+            
+            .cta-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero-text h1 {
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+            
+            .hero-text p {
+                font-size: 0.95rem;
+            }
+            
+            .btn-primary, .btn-secondary {
+                font-size: 1rem;
+                padding: 0.9rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+            }
+            
+            .feature-card {
+                padding: 1.2rem;
+            }
+            
+            .feature-title {
+                font-size: 1.3rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .stat-label {
+                font-size: 1rem;
+            }
+        }
+
+        /* Extra small devices (320px and below) */
+        @media (max-width: 320px) {
+            .hero-text h1 {
+                font-size: 1.6rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .floating-card {
+                padding: 1rem;
+            }
+            
+            .feature-card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">CollExpress</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#opportunities">Opportunities</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+           <div style="display: flex; align-items: center; gap: 1rem;">
+    <a href="#platform" class="cta-btn">Get Started</a>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+</div>
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="closeMobileMenu()">Home</a>
+    <a href="#features" onclick="closeMobileMenu()">Features</a>
+    <a href="#opportunities" onclick="closeMobileMenu()">Opportunities</a>
+    <a href="#about" onclick="closeMobileMenu()">About</a>
+    <a href="#platform" onclick="closeMobileMenu()">Get Started</a>
+</div>
+
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Connect Students with Opportunities</h1>
+                    <p>The marketplace where students offer their skills and businesses find talented, affordable help. Choose your path and get started today.</p>
+                    <div class="hero-buttons">
+                        <a href="sp-auth.php" class="btn-primary">I'm a Student - Start Earning</a>
+                        <a href="auth.php" class="btn-secondary">I Need Student Help</a>
+                </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="floating-card">
+                        <div class="card-icon">💰</div>
+                        <div class="card-title">Tutoring</div>
+                        <div class="card-desc">₹1.5k/hour</div>
+                    </div>
+                    <div class="floating-card">
+                        <div class="card-icon">💻</div>
+                        <div class="card-title">Freelancing</div>
+                        <div class="card-desc">₹1.8k/hour</div>
+                    </div>
+                    <div class="floating-card">
+                        <div class="card-icon">🚚</div>
+                        <div class="card-title">Delivery</div>
+                        <div class="card-desc">₹1.1k/hour</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Two-Sided Platform Section -->
+    <section class="platform-sides" id="platform">
+        <div class="container">
+            <h2 class="section-title">Two Sides, One Platform</h2>
+            <p class="section-subtitle">Whether you're a student looking to earn or a business needing help, we've got you covered.</p>
+            
+            <div class="sides-container">
+                <div class="side-card student-side">
+                    <div class="side-header">
+                        <div class="side-icon">🎓</div>
+                        <h3>For Students</h3>
+                        <p class="side-subtitle">Turn your skills into income</p>
+                    </div>
+                    
+                    <div class="side-content">
+                        <h4>What You Can Offer:</h4>
+                        <ul class="service-list">
+                            <li>📚 Academic Tutoring ($15-35/hr)</li>
+                            <li>💻 Web Development ($25-60/hr)</li>
+                            <li>🎨 Graphic Design ($20-45/hr)</li>
+                            <li>✍️ Content Writing ($15-40/hr)</li>
+                            <li>📱 Social Media Management ($18-35/hr)</li>
+                            <li>🌐 Translation Services ($20-50/hr)</li>
+                            <li>📸 Photography ($25-75/hr)</li>
+                            <li>🎵 Music Lessons ($20-40/hr)</li>
+                        </ul>
+                        
+                        <div class="side-benefits">
+                            <h4>Student Benefits:</h4>
+                            <div class="benefit-grid">
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">⏰</span>
+                                    <span>Flexible Schedule</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">💰</span>
+                                    <span>Fair Pay</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">📈</span>
+                                    <span>Skill Building</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">🛡️</span>
+                                    <span>Secure Payments</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Student side CTA -->
+<a href="sp-auth.php" class="side-cta-btn student-btn">Start Earning as a Student</a>
+                    </div>
+                </div>
+
+                <div class="side-card business-side">
+                    <div class="side-header">
+                        <div class="side-icon">🏢</div>
+                        <h3>For Businesses</h3>
+                        <p class="side-subtitle">Find talented students at great rates</p>
+                    </div>
+                    
+                    <div class="side-content">
+                        <h4>What You Can Get:</h4>
+                        <ul class="service-list">
+                            <li>💼 Marketing Support</li>
+                            <li>🖥️ Website Development</li>
+                            <li>📊 Data Entry & Analysis</li>
+                            <li>🎬 Video Editing</li>
+                            <li>📝 Content Creation</li>
+                            <li>🔍 Research Assistance</li>
+                            <li>📞 Customer Service</li>
+                            <li>🎯 Social Media Marketing</li>
+                        </ul>
+                        
+                        <div class="side-benefits">
+                            <h4>Business Benefits:</h4>
+                            <div class="benefit-grid">
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">💵</span>
+                                    <span>Cost Effective</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">⚡</span>
+                                    <span>Quick Turnaround</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">🎯</span>
+                                    <span>Fresh Perspectives</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">✅</span>
+                                    <span>Vetted Students</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Business side CTA -->
+<a href="auth.php" class="side-cta-btn business-btn">Hire Students Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose CollExpress?</h2>
+            <p class="section-subtitle">We understand student life. That's why we've built a platform that works around your schedule, not against it.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3 class="feature-title">Two-Sided Marketplace</h3>
+                    <p class="feature-desc">Connect students with businesses in a secure, verified environment designed for success on both sides.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏰</div>
+                    <h3 class="feature-title">Flexible & Fair</h3>
+                    <p class="feature-desc">Students set their schedules and rates, while businesses get quality work at competitive prices.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3 class="feature-title">Skill Development</h3>
+                    <p class="feature-desc">Students gain real-world experience while businesses benefit from fresh perspectives and digital-native skills.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title">Safe & Secure</h3>
+                    <p class="feature-desc">Verified profiles, secure payments, dispute resolution, and 24/7 support protect all users.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Smart Matching</h3>
+                    <p class="feature-desc">Our algorithm matches the right students with the right projects based on skills, location, and availability.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="feature-title">Growth Focused</h3>
+                    <p class="feature-desc">Rating system helps students build reputation while businesses find top performers for future projects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Opportunities Section -->
+<section class="features" id="opportunities">
+  <div class="container">
+    <h2 class="section-title">Explore Student Opportunities</h2>
+    <p class="section-subtitle">From tutoring to freelancing, CollExpress opens doors for students to earn, learn, and grow.</p>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3 class="feature-title">Tutoring</h3>
+        <p class="feature-desc">Help peers and juniors excel while earning fair hourly pay.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💻</div>
+        <h3 class="feature-title">Freelance Projects</h3>
+        <p class="feature-desc">Take on real-world projects in web dev, design, writing, and more.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3 class="feature-title">Creative Services</h3>
+        <p class="feature-desc">Offer your photography, editing, and creative skills to clients.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h3 class="feature-title">Startup Support</h3>
+        <p class="feature-desc">Work with startups, gain experience, and build your portfolio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">25K+</div>
+                    <div class="stat-label">Active Students</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5K+</div>
+                    <div class="stat-label">Partner Businesses</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$2M+</div>
+                    <div class="stat-label">Earned by Students</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4.8★</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- About Section -->
+<section class="features" id="about">
+  <div class="container">
+    <h2 class="section-title">About CollExpress</h2>
+    <p class="section-subtitle">We’re building more than just a platform — we’re creating a community where students gain skills, earn money, and businesses find fresh talent.</p>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3 class="feature-title">Our Mission</h3>
+        <p class="feature-desc">To empower students by connecting them with meaningful earning opportunities that build real-world skills.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h3 class="feature-title">Our Vision</h3>
+        <p class="feature-desc">A future where every student can balance education and earning, while shaping their career path early.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3 class="feature-title">Our Values</h3>
+        <p class="feature-desc">Trust, fairness, growth, and opportunity — these guide every connection we make on the platform.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CollExpress</h3>
+                    <p>Empowering college students to earn money while building their future. Join the community that's changing how students work.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#home">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#opportunities">Find Work</a>
+                    <a href="#about">About Us</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <a href="#help">Help Center</a>
+                    <a href="#contact">Contact Us</a>
+                    <a href="#safety">Safety Guidelines</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#cookies">Cookie Policy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CollExpress. All rights reserved. Made with ❤️ for students.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.remove('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('nav');
+            
+            if (!nav.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Animate stats when they come into view
+        const animateStats = () => {
+            const stats = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const finalValue = target.textContent;
+                        const isNumber = !isNaN(parseInt(finalValue));
+                        
+                        if (isNumber) {
+                            const numValue = parseInt(finalValue.replace(/[^0-9]/g, ''));
+                            let current = 0;
+                            const increment = numValue / 50;
+                            const timer = setInterval(() => {
+                                current += increment;
+                                if (current >= numValue) {
+                                    target.textContent = finalValue;
+                                    clearInterval(timer);
+                                } else {
+                                    const suffix = finalValue.includes('K') ? 'K+' : 
+                                                 finalValue.includes('M') ? 'M+' : 
+                                                 finalValue.includes('★') ? '★' : '+';
+                                    target.textContent = Math.floor(current) + suffix;
+                                }
+                            }, 50);
+                        }
+                        observer.unobserve(target);
+                    }
+                });
+            });
+            
+            stats.forEach(stat => observer.observe(stat));
+        };
+
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', animateStats);
+    </script>
+</body>
+</html>
